@@ -1,18 +1,48 @@
 // index.js
-const http = require('http');
+// const http = require('http');
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-  
-     // Use backticks (`) for template literals
-     const emailMessage = `Email address from environment variable: ${process.env.EMAIL}`;
-    
-     // Sending the email message as the response
-     res.end(emailMessage);
-});
+const path = require('path');
+const express = require('express');
+const sgMail = require('@sendgrid/mail');
+const cors = require('cors');
+
 
 const PORT = process.env.PORT || 3000;
+const api_key = process.env.SENDGRID_API_KEY;
 
-server.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+sgMail.setApiKey(api_key);
+const app = express();
+app.use(cors());
+
+
+app.get('/send-email', (req, res) => {
+    // console.log('GET request to /send-email');
+    res.status(200).json({ message: 'Send email GET endpoint' });
+  });
+  
+app.get('/test', (req, res) => {
+// console.log('GET request to /test');
+res.status(200).json({ message: 'Test GET endpoint' });
 });
+
+
+
+
+
+
+
+// const server = http.createServer((req, res) => {
+//     res.writeHead(200, {'Content-Type': 'text/plain'});
+  
+//      // Use backticks (`) for template literals
+//      const emailMessage = `Email address from environment variable: ${process.env.EMAIL}`;
+    
+//      // Sending the email message as the response
+//      res.end(emailMessage);
+// });
+
+// const PORT = process.env.PORT || 3000;
+
+// server.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
