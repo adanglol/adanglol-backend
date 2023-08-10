@@ -4,7 +4,11 @@ const http = require('http');
 const server = http.createServer((req, res) => {
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Hello, Node.js!');
-    res.end('process.env.EMAIL');
+     // Use backticks (`) for template literals
+     const emailMessage = `Email address from environment variable: ${process.env.EMAIL}`;
+    
+     // Sending the email message as the response
+     res.end(emailMessage);
 });
 
 const PORT = process.env.PORT || 3000;
