@@ -1,5 +1,4 @@
-// index.js
-// const http = require('http');
+// index.js - the main file of the application
 
 const path = require('path');
 const express = require('express');
@@ -17,23 +16,40 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    // console.log('GET request to /');
-    // res.status(200).json({ message: 'GET endpoint' });
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-
-
   });
 
 app.get('/send-email', (req, res) => {
-    // console.log('GET request to /send-email');
     res.status(200).json({ message: 'Send email GET endpoint' });
   });
   
 app.get('/test', (req, res) => {
-// console.log('GET request to /test');
-res.status(200).json({ message: 'Test GET endpoint' });
+    res.status(200).json({ message: 'Test GET endpoint' });
 });
 
+// implement the POST /send-email endpoint
+app.post('/send-email', (req, res) => {
+    // console.log('POST request to /send-email');
+    const { to, subject, text } = req.body;
+  
+    const msg = {
+      to,
+      from: process.env.EMAIL, // Replace with your own email address
+      subject,
+      text,
+    };
+  
+    sgMail
+      .send(msg)
+      .then(() => {
+        res.status(200).json({ message: 'Email sent successfully' });
+      })
+      .catch((error) => {
+        // console.error('Error sending email:', error);
+        res.status(500).json({ message: 'An error occurred while sending the email' });
+      });
+  });
+  
 app.listen(PORT);
 
 
