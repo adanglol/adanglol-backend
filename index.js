@@ -15,6 +15,13 @@ const app = express();
 app.use(cors());
 
 
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    // console.log('GET request to /');
+    res.status(200).json({ message: 'GET endpoint' });
+  });
+
 app.get('/send-email', (req, res) => {
     // console.log('GET request to /send-email');
     res.status(200).json({ message: 'Send email GET endpoint' });
@@ -25,6 +32,7 @@ app.get('/test', (req, res) => {
 res.status(200).json({ message: 'Test GET endpoint' });
 });
 
+app.listen(PORT);
 
 
 
