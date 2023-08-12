@@ -1,5 +1,4 @@
 // index.js - the main file of the application
-
 const path = require('path');
 const express = require('express');
 const sgMail = require('@sendgrid/mail');
@@ -11,12 +10,7 @@ sgMail.setApiKey(api_key);
 
 const app = express();
 
-app.use(cors({
-  // origin: 'https://adanglol-backend-b3a02bbea64a.herokuapp.com',
-  // methods: ['POST', 'GET'],
-  // optionsSuccessStatus: 204,
-  // credentials: true,
-}));
+app.use(cors({}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
@@ -59,22 +53,3 @@ app.post('/send-email', (req, res) => {
 app.listen(PORT);
 
 
-
-
-
-
-// const server = http.createServer((req, res) => {
-//     res.writeHead(200, {'Content-Type': 'text/plain'});
-  
-//      // Use backticks (`) for template literals
-//      const emailMessage = `Email address from environment variable: ${process.env.EMAIL}`;
-    
-//      // Sending the email message as the response
-//      res.end(emailMessage);
-// });
-
-// const PORT = process.env.PORT || 3000;
-
-// server.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
