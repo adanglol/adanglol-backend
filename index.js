@@ -11,7 +11,13 @@ sgMail.setApiKey(api_key);
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://adanglol-backend-b3a02bbea64a.herokuapp.com/send-email',
+  methods: ['POST', 'GET'],
+  optionsSuccessStatus: 204,
+  credentials: true,
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
