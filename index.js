@@ -6,16 +6,16 @@ const sgMail = require('@sendgrid/mail');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
-const api_key = process.env.SENDGRID_API_KEY;
+const api_key = process.env.REACT_APP_SENDGRID_API_KEY;
 sgMail.setApiKey(api_key);
 
 const app = express();
 
 app.use(cors({
-  origin: 'https://adanglol-backend-b3a02bbea64a.herokuapp.com',
-  methods: ['POST', 'GET'],
-  optionsSuccessStatus: 204,
-  credentials: true,
+  // origin: 'https://adanglol-backend-b3a02bbea64a.herokuapp.com',
+  // methods: ['POST', 'GET'],
+  // optionsSuccessStatus: 204,
+  // credentials: true,
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,7 +30,7 @@ app.get('/send-email', (req, res) => {
   });
   
 app.get('/test', (req, res) => {
-    res.status(200).json({ message: 'Test GET endpoint' });
+    res.status(200).json({ message: 'Test GET endpoint ${process.env.}' });
 });
 
 // implement the POST /send-email endpoint
