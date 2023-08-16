@@ -1,11 +1,15 @@
 // index.js - the main file of the application
+
+// Uncomment for local development
+// require('dotenv').config();
+
 const path = require('path');
 const express = require('express');
 const sgMail = require('@sendgrid/mail');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 3000;
-const api_key = process.env.REACT_APP_SENDGRID_API_KEY;
+const PORT = process.env.PORT || 4000;
+const api_key = process.env.REACT_APP_SENDGRID_API_KEY ;
 sgMail.setApiKey(api_key);
 
 const app = express();
